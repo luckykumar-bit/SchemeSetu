@@ -1,5 +1,7 @@
 # Tech Stack Documentation — Samarthya Portal
 
+> 📖 **Full Documentation Suite**: For exhaustive system documentation, user journeys, mathematical formulas, and API specs, please refer to the [Complete Documentation Suite (documentation/README.md)](../documentation/README.md).
+
 ## 1. System Architecture Overview
 **Samarthya** is an intelligent government scheme matching platform designed to connect special-needs students with welfare schemes. It follows a decoupled, modular architecture featuring a high-performance vanilla frontend, a lightweight Python FastAPI microservice, and offline-capable client storage.
 

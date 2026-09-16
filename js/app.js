@@ -128,6 +128,12 @@ const App = {
     }
 
     this.populateCreditFormOptions();
+    if (window.MotionEngine) {
+      MotionEngine.setOpportunityFieldTheme(persona);
+    }
+    if (window.SoundEngine) {
+      SoundEngine.playWhoosh();
+    }
     if (window.AccessibilitySuite) {
       AccessibilitySuite.announce(`Switched to ${persona === 'credit' ? 'Credit and Enterprise Schemes' : 'Welfare and Education Schemes'} track`);
     }
@@ -185,6 +191,10 @@ const App = {
     // Announce for accessibility
     if (window.AccessibilitySuite) {
       AccessibilitySuite.announce(`Navigated to ${page} page`);
+    }
+
+    if (page === 'home' && window.ScrollTrigger) {
+      setTimeout(() => ScrollTrigger.refresh(), 150);
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });

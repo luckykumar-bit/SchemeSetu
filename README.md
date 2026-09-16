@@ -139,8 +139,18 @@ Samarthya_Ai/
 │   ├── main.py                 # FastAPI microservice (Welfare + NSFDC Credit)
 │   ├── schemes.json            # Central scheme & channel partner JSON store
 │   └── requirements.txt        # Backend dependencies
+├── documentation/              # Complete In-Depth Documentation Suite
+│   ├── README.md               # Documentation Master Hub & Index
+│   ├── 01_SYSTEM_OVERVIEW_AND_VISION.md
+│   ├── 02_ARCHITECTURE_AND_TECH_STACK.md
+│   ├── 03_FEATURES_DEEP_DIVE.md
+│   ├── 04_END_TO_END_PROCESSES_AND_USER_JOURNEYS.md
+│   ├── 05_ALGORITHMS_AND_FORMULAS.md
+│   ├── 06_API_SPECIFICATION.md
+│   ├── 07_SCHEMES_AND_DATABASE_CATALOG.md
+│   └── 08_DEPLOYMENT_AND_OPERATIONS_GUIDE.md
 ├── docs/
-│   └── TECH_STACK.md           # Detailed architectural specification
+│   └── TECH_STACK.md           # Architectural specification
 └── README.md                   # Project documentation
 ```
 

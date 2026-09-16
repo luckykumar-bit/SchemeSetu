@@ -59,6 +59,11 @@
       this.ring.id = 'custom-cursor-ring';
       this.ring.className = 'custom-cursor-ring';
 
+      // 2b. Contextual Badge typography inside ring
+      this.badge = document.createElement('span');
+      this.badge.className = 'cursor-context-badge';
+      this.ring.appendChild(this.badge);
+
       // 3. Canvas for click ripple particles and trailing energy
       this.trailCanvas = document.createElement('canvas');
       this.trailCanvas.id = 'custom-cursor-canvas';
@@ -181,6 +186,40 @@
           background: #ffffff;
         }
 
+        /* Contextual Badge Typography */
+        .cursor-context-badge {
+          display: none;
+          font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+          font-size: 8.5px;
+          font-weight: 800;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #05070A;
+          pointer-events: none;
+          user-select: none;
+        }
+
+        .custom-cursor-ring.has-badge {
+          width: 56px !important;
+          height: 56px !important;
+          margin-top: -28px !important;
+          margin-left: -28px !important;
+          border-color: #00E5FF !important;
+          background: rgba(0, 229, 255, 0.92) !important;
+          box-shadow: 0 0 30px rgba(0, 229, 255, 0.7) !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .custom-cursor-ring.has-badge .cursor-context-badge {
+          display: inline-block;
+        }
+
+        body.has-custom-badge .custom-cursor-dot {
+          opacity: 0 !important;
+        }
+
         /* Accessibility: Disable when reduced motion is requested */
         @media (prefers-reduced-motion: reduce) {
           .custom-cursor-dot,
@@ -251,6 +290,25 @@
     checkHover(target) {
       if (!target) return;
 
+      // 1. Contextual Badge Detection
+      const badgeTarget = target.closest('[data-cursor], .dual-world-pane, .interactive-opportunity-core, #voiceWaveformCanvas, #cinematicMapContainer, .a11y-art-tile');
+      if (badgeTarget) {
+        let badgeLabel = badgeTarget.dataset.cursor;
+        if (!badgeLabel) {
+          if (badgeTarget.closest('.dual-world-pane')) badgeLabel = 'EXPLORE';
+          else if (badgeTarget.id === 'voiceWaveformCanvas') badgeLabel = 'LISTEN';
+          else if (badgeTarget.id === 'cinematicMapContainer') badgeLabel = 'LOCATE';
+          else if (badgeTarget.classList.contains('a11y-art-tile')) badgeLabel = 'ADAPT';
+        }
+        if (badgeLabel) {
+          this.setContextState(badgeLabel);
+        } else {
+          this.setContextState('');
+        }
+      } else {
+        this.setContextState('');
+      }
+
       const interactive = target.closest(
         'a, button, input, select, textarea, label, [role="button"], .btn, .btn-sm, .btn-primary, .btn-secondary, .scheme-card, .form-card, .voice-input-btn, .ai-floating-btn, .a11y-floating-btn, .a11y-toggle-btn, .badge, .tab-btn, .step-label, [onclick]'
       );
@@ -278,6 +336,19 @@
         this.targetScale = 1;
         this.ring.classList.remove('cursor-input', 'cursor-hover');
         this.dot.classList.remove('cursor-input', 'cursor-hover');
+      }
+    },
+
+    setContextState(label) {
+      if (!this.ring || !this.badge) return;
+      if (label) {
+        this.badge.textContent = label;
+        this.ring.classList.add('has-badge');
+        document.body.classList.add('has-custom-badge');
+      } else {
+        this.ring.classList.remove('has-badge');
+        document.body.classList.remove('has-custom-badge');
+        this.badge.textContent = '';
       }
     },
 
@@ -360,6 +431,8 @@
       this.rafId = requestAnimationFrame(() => this.render());
     }
   };
+
+  window.CursorEffect = CursorEffect;
 
   // Initialize once DOM is loaded or immediately if already ready
   if (document.readyState === 'loading') {
