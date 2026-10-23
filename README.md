@@ -225,3 +225,5 @@ Interactive OpenAPI Swagger docs will be available at `http://127.0.0.1:8000/doc
 - **Statutory Schemes Attribution**: Information sourced from official public domain guidelines of the **National Scheduled Castes Finance and Development Corporation (NSFDC)**, Ministry of Social Justice and Empowerment (MoSJE), Department of Empowerment of Persons with Disabilities (DEPwD), and National Scholarship Portal (NSP).
 - **Privacy Notice**: Samarthya complies with the provisions of the Digital Personal Data Protection (DPDP) Act 2023.
 - **License**: Distributed under the MIT License.
+#   S c h e m e S e t u  
+ 
